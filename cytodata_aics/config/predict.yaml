@@ -1,0 +1,8 @@
+defaults:
+  - _self_
+  - defaults/predict@_here_
+  - model: default
+  - data: default
+  - mlflow: default
+  - trainer: default
+  - hydra
