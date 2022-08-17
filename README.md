@@ -2,6 +2,7 @@
 
 ## Getting started
 
+- As you'll suspect from the subsequent bullet points, I recommend you use the internal JupyterHub service I configured at https://jupyterhub.a100.int.allencell.org (if you're not at the Institute, you need to be connected to the VPN)
 - **Important**: If you're running from within JupyterHub, precede `pip` commands with `sudo`.
 - There is a `requirements.txt` at the root of this repo which contains a list of necessary packages
 - To configure access to Minio, the FSSPEC_CONFIG_DIR should be set and pointing to an appropriate config directory.
