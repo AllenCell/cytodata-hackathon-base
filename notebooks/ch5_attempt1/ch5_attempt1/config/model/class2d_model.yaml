@@ -1,9 +1,16 @@
-_target_: serotiny.models.TabularVAE
-x_dim: 100
-latent_dim: 16
-hidden_layers: [32, 32, 32]
-x_label: "x"
-optimizer:
-  _partial_: true
-  _target_: torch.optim.Adam
-  lr: 1e-3
+_target_: ch5_attempt1.model.Classifier
+x_label: image
+y_label: class
+network:
+  _target_: serotiny.networks.basic_cnn.BasicCNN
+  in_channels: 1
+  output_dim: 2
+  input_dims: [248,381]
+  hidden_channels: [2, 4, 8]
+  max_pool_layers: [0, 1, 2]
+  non_linearity:
+    _target_: torch.nn.ReLU
+  skip_connections: True
+  mode: '2d'
+loss:
+  _target_: torch.nn.CrossEntropyLoss
