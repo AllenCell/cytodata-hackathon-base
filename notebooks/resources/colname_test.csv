@@ -1,0 +1,15 @@
+CellId: a unique identifier of each cell (match with the CellId in cfe.allencell.org)
+FOVId: a unique identifier of the FOV image this cell is segmented from
+structure_name: the cell line this image was acquired from
+crop_raw: the file path to access cropped single cell image (raw image), which is an unsigned 16-bit multi-channel 3D image. The name of each channel can be found in the column name_dict.
+crop_seg: the file path to access cropped single cell image (segmentation), which is an unsigned 8-bit multi-channel 3D image (pixel value = 0 or 255, 255 indicates the segmentation mask). The name of each channel can be found in column name_dict.
+name_dict: a dictionary of channel names in crop_raw and crop_seg. The python dictionary can be programmatically extract by the eval() function.
+roi: the ROI position of this cell in the full field-of-view (FOV)
+scale_micron: the size (in micrometer) of a single voxel along each dimension
+fov_path: the path to the FOV image this cell is segmented from.
+fov_seg_path: the path to the cell and nuclear segmentation of the FOV image this cell is segmented from. The segmentation is an unsigned 8-bit multi-channel 3D image. Pixels values are sequetial integers from 0 to the total number of cells in this FOV. Each integer represents one unique cell. The image contains 4 channels nuclear segmentation, cell segmentation, contour of nuclei segmentation, and contour of cell segmentation.
+struct_seg_path: the path to the structure segmentation of the FOV image this cell is segmented from, which is an unsigned 8-bit single-channel 3D image (pixel value = 0 or 255, 255 indicates the segmentation mask).
+this_cell_nbr_complete: a boolean value indicating if all the direct neighboring cells in the colony are successfully segmented and included in the dataset
+this_cell_nbr_dist_2d: a dictionary of the distance (2D euclidean distance in XY dimension) from this cell to its neightbors in the dataset.
+edge_flag: a boolean value indicating if this cell is on the edge of a colony
+this_cell_index: the index of this cell (i.e., the integer value in the segmentation image) in this FOV.
