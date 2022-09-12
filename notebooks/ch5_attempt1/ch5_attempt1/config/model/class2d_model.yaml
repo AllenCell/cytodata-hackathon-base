@@ -1,22 +1,21 @@
 _aux_: 
-    _: &conv_block
-        _target_: torch.nn.Sequential
-        _args_:
-            -_target_: torch.nn.LazyConv2d
-            out_channels: 4
-            kernel_size: 3
-            stride: 1
-            -_target_: torch.nn.LeakyReLU
-            -_target_: torch.nn.LazyBatchNorm2d
-            
-_target_: ch5_attempt1.ch5_attempt1.model.Classifier
+  _: &conv_block
+    _target_: torch.nn.Sequential
+    _args_:
+      - _target_: torch.nn.LazyConv3d
+        out_channels: 4
+        kernel_size: 3
+        stride: 1
+      - _target_: torch.nn.LeakyReLU
+      - _target_: torch.nn.LazyBatchNorm3d
+_target_: ch5_attempt1.model.Classifier
 x_label: image
 y_label: class
 network:
   _target_: torch.nn.Sequential
   _args_:
-      -*conv_block
-      -*conv_block
-      -*conv_block
+    - *conv_block
+    - *conv_block
+    - *conv_block
 loss:
   _target_: torch.nn.CrossEntropyLoss
