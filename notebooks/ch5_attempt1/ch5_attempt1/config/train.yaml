@@ -1,0 +1,8 @@
+defaults:
+  - _self_
+  - defaults/train@_here_
+  - model: default
+  - data: default
+  - mlflow: default
+  - trainer: default
+  - hydra
