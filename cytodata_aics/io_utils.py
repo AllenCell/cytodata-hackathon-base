@@ -12,7 +12,7 @@ def rescale_image(img_data, channels=('bf', 'dna', 'membrane', 'structure',
 
     _MAX_UINT16 = 65535
 
-    img_data = img_data.squeeze().astype(np.float32)
+    img_data = img_data.astype(np.float32)
 
     for ix, channel in enumerate(channels):
         if "_seg" not in channel:
