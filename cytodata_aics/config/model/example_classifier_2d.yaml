@@ -1,0 +1,29 @@
+_aux_: 
+  _a: &hidden_channels 4
+  _b: &kernel_size 3
+  _c: &conv_block
+    _target_: torch.nn.Sequential
+    _args_:
+      - _target_: torch.nn.LazyConv2d
+        out_channels: *hidden_channels
+        kernel_size: *kernel_size
+        stride: 1
+      - _target_: torch.nn.LeakyReLU
+      - _target_: torch.nn.LazyBatchNorm2d
+
+_target_: serotiny.models.BasicModel
+x_label: image
+y_label: class
+network:
+  _target_: torch.nn.Sequential
+  _args_:
+    - *conv_block
+    - *conv_block
+    - *conv_block
+    - _target_: serotiny.networks.layers.Flatten
+    - _target_: torch.nn.LazyLinear
+      out_features: 1
+    - _target_: torch.nn.Sigmoid
+    
+loss:
+  _target_: torch.nn.BCELoss
