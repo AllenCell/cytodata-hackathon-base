@@ -32,7 +32,7 @@ classifiers = [
 [tool.poetry.dependencies]
 python = "^3.8"
 poethepoet = "^0.10.0"
-serotiny = {version = ">=0.0.0*", allow-prereleases = true}
+serotiny = {git = "https://github.com/allencell/serotiny.git", branch = "tag/cytodata"}
 
 [tool.poe.tasks]
 force-cuda101 = "python -m pip install --force-reinstall 'torch>=1.8.1+cu101' -f https://download.pytorch.org/whl/cu101/torch_stable.html"
