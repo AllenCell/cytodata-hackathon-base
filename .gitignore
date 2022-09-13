@@ -134,3 +134,6 @@ output/
 
 checkpoints/
 */checkpoints/
+
+mlruns/
+*/mlruns/
