@@ -14,6 +14,6 @@ def save_predictions_classifier(preds, output_dir):
         record["loss"] = [pred["loss"].item()] * len(pred["id"])
         records.append(pd.DataFrame(record))
 
-    pd.concat(records).reset_index().drop(columnd="index").to_csv(
+    pd.concat(records).reset_index().drop(columns="index").to_csv(
         Path(output_dir) / "model_predictions.csv", index_label=False
     )
