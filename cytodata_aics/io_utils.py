@@ -1,7 +1,8 @@
 import numpy as np
 
 
-def rescale_image(img_data, channels):
+def rescale_image(img_data, channels=('bf', 'dna', 'membrane', 'structure',
+                                      'dna_segmentation', 'membrane_segmentation', 'struct_segmentation_roof')):
     """
     'Raw' channels are stored with values between 0 and MAX_UINT16,
     where the 0-valued voxels denote the background. This function
