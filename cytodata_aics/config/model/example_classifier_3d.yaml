@@ -27,3 +27,13 @@ network:
     
 loss:
   _target_: torch.nn.BCELoss
+  
+# a function used by `serotiny predict` to store the results of feeding data through the model
+save_predictions:
+  _target_: cytodata_aics.model_utils.save_predictions_classifier
+  _partial_: true
+
+# fields to include in the output for each batch
+fields_to_log:
+  - id
+    
