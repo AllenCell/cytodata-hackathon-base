@@ -20,6 +20,5 @@ loaders:
     transform:
       _partial_: true
       _target_: cytodata_aics.io_utils.rescale_image
-      channels: ['bf', 'dna', 'membrane', 'structure', 'dna_segmentation', 'membrane_segmentation', 'struct_segmentation_roof']
     
 split_column: "split"

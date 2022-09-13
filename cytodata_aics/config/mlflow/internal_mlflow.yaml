@@ -1,3 +1,6 @@
+defaults:
+  - /defaults/mlflow/default@_here_
+  
 tracking_uri: https://mlflow.a100.int.allencell.org
 experiment_name: chapter_5_iteration
 run_name:
