@@ -1,0 +1,27 @@
+_target_: serotiny.datamodules.ManifestDatamodule
+
+path: /home/aicsuser/serotiny_data/cells_edgeVSnoedge.csv
+
+batch_size: 16
+num_workers: 10
+loaders:
+  id:
+    _target_: serotiny.io.dataframe.loaders.LoadColumn
+    column: CellId
+    dtype: int
+  class:
+    _target_: serotiny.io.dataframe.loaders.LoadColumn
+    column: edge_flag
+    dtype: float32
+  image:
+    _target_: serotiny.io.dataframe.loaders.LoadImage
+    column: registered_path
+    select_channels: ['membrane']
+    dtype: float32
+    transform:
+      _partial_: true
+      _target_: cytodata_aics.io_utils.rescale_image
+      channels: ['membrane']
+    
+split_column: "split"
+
