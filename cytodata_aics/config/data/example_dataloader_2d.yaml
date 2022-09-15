@@ -1,0 +1,23 @@
+_target_: serotiny.datamodules.ManifestDatamodule
+
+path: /home/aicsuser/serotiny_data/cells_edgeVSnoedge.csv
+
+batch_size: 64
+num_workers: 10
+shuffle: true
+
+loaders:
+  id:
+    _target_: serotiny.io.dataframe.loaders.LoadColumn
+    column: CellId
+    dtype: int
+  class:
+    _target_: serotiny.io.dataframe.loaders.LoadColumn
+    column: edge_flag
+    dtype: float32 # BCELoss takes probabilities
+  image:
+    _target_: serotiny.io.dataframe.loaders.LoadImage
+    column: max_projection_z
+    select_channels: ['membrane']  
+    
+split_column: "split"

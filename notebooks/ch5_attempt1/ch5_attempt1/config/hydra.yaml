@@ -1,4 +1,0 @@
-defaults:
-  - defaults/hydra@_here_
-
-hydra: {}
