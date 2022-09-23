@@ -37,15 +37,15 @@ median_projection_y,Path to median projection of Y dimension,cell images
 median_projection_z,Path to median projection of Z dimension,cell images
 membrane_clip_hi,Cell Membrane pixel intensity used for upper bound clipped values,cell metric
 membrane_clip_lo,Cell Membrane pixel intensity used for lower bound clipped values,cell metric
-meta_colony_area,Area of colony,colony metadata
-meta_colony_centroid,"(X,Y) centroid of colony",colony metadata
-meta_colony_label,Colony identifier,colony metadata
+meta_colony_area,Area of colony,field-of-view metadata
+meta_colony_centroid,"(X,Y) centroid of colony",field-of-view metadata
+meta_colony_label,Colony identifier,field-of-view metadata
 meta_fov_edgedist,Euclidean distance of FOV centroid to nearest colony edge,field-of-view metadata
-meta_fov_outside_overview,Whether or not the colony touches the boundary of the overview image,colony metadata
+meta_fov_outside_overview,Whether or not the colony touches the boundary of the overview image,field-of-view metadata
 meta_fov_position,"Position of FOV: edge, center, or ridge",field-of-view metadata
 meta_fov_xcoord,X component of stage centroid coordinate,field-of-view metadata
 meta_fov_ycoord,Y component of stage centroid coordinate,field-of-view metadata
-meta_imaging_mode,"One of three modes used to capture variations in colony area and locations within the colony (modes A and C), and to enrich images with mitotic cells (mode B) ",colony metadata
+meta_imaging_mode,"One of three modes used to capture variations in colony area and locations within the colony (modes A and C), and to enrich images with mitotic cells (mode B) ",field-of-view metadata
 meta_plate_bad_segmentation,Whether or not poor colony segmentations were detected,field-of-view metadata
 meta_plate_confluency,Percentage of confluency on the plate,field-of-view metadata
 meta_well_passage_at_imaging,Total passages,field-of-view metadata
@@ -77,3 +77,4 @@ this_cell_nbr_dist_2d,a dictionary of the distance (2D euclidean distance in XY 
 WellId,Well identifier,field-of-view metadata
 WorkflowId,Imaging workflow identifier (see Variance paper for details?),field-of-view metadata
 Protein,The protein name.,cell metadata
+Expert mitotic state resolved,Mitotic state as annotated by experts,cell metadata
