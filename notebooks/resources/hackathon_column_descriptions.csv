@@ -77,3 +77,4 @@ this_cell_nbr_dist_2d,a dictionary of the distance (2D euclidean distance in XY 
 WellId,Well identifier,field-of-view metadata
 WorkflowId,Imaging workflow identifier (see Variance paper for details?),field-of-view metadata
 Protein,The protein name.,cell metadata
+Expert mitotic state resolved,Mitotic state as annotated by experts,cell metadata
