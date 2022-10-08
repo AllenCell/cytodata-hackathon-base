@@ -19,5 +19,6 @@ loaders:
     _target_: serotiny.io.dataframe.loaders.LoadImage
     column: max_projection_z
     select_channels: ['membrane']  
+    unsqueeze_first_dim: true
     
 split_column: "split"
