@@ -24,7 +24,6 @@ network:
     - *conv_block
     - *conv_block
     - *conv_block
-    - *conv_block
     - _target_: serotiny.networks.layers.Flatten
     - _target_: torch.nn.LazyLinear
       out_features: 1
@@ -41,4 +40,3 @@ save_predictions:
 # fields to include in the output for each batch
 fields_to_log:
   - id
-    
