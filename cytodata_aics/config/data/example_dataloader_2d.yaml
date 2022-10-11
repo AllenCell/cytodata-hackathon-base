@@ -20,6 +20,7 @@ loaders:
     column: max_projection_z
     select_channels: ['dna']  
     dtype: float32
+    unsqueeze_first_dim: true
     transform:
       _partial_: true
       _target_: cytodata_aics.io_utils.rescale_image
