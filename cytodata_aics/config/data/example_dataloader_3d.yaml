@@ -16,12 +16,14 @@ loaders:
   image:
     _target_: serotiny.io.dataframe.loaders.LoadImage
     column: registered_path
-    select_channels: ['membrane']
+    select_channels: ['dna']
+    ome_zarr_level: 2
+    force_3d: True
     dtype: float32
     transform:
       _partial_: true
       _target_: cytodata_aics.io_utils.rescale_image
-      channels: ['membrane']
+      channels: ['dna']
     
 split_column: "split"
 

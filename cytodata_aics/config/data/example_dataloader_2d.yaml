@@ -18,6 +18,12 @@ loaders:
   image:
     _target_: serotiny.io.dataframe.loaders.LoadImage
     column: max_projection_z
-    select_channels: ['membrane','dna']  
+    select_channels: ['dna']  
+    dtype: float32
+    transform:
+      _partial_: true
+      _target_: cytodata_aics.io_utils.rescale_image
+      channels: ['dna']
+    
     
 split_column: "split"
