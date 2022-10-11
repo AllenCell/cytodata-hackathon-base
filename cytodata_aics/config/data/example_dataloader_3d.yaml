@@ -18,7 +18,7 @@ loaders:
     column: registered_path
     select_channels: ['dna']
     ome_zarr_level: 2
-    force_3d: True
+    unsqueeze_first_dim: true
     dtype: float32
     transform:
       _partial_: true
