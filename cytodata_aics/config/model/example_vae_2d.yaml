@@ -1,0 +1,33 @@
+_target_: serotiny.models.vae.ImageVAE
+latent_dim: 512
+in_channels: 1
+hidden_channels: [2, 2, 2, 2]
+max_pool_layers: [2]
+input_dims: [238, 374]
+x_label: image
+optimizer:
+  _partial_: true
+  _target_: torch.optim.adam.Adam
+  lr: 0.001
+  betas:
+  - 0.9
+  - 0.999
+  eps: 1.0e-08
+  weight_decay: 0
+  amsgrad: false
+beta: 1.0
+non_linearity:
+  # _target_: torch.nn.SiLU
+    _target_: torch.nn.ReLU
+prior:
+  image: 
+    _target_: serotiny.models.vae.priors.IsotropicGaussianPrior
+    dimensionality: 512
+reconstruction_loss:
+  image: 
+    _target_: torch.nn.modules.loss.MSELoss
+    reduction: none
+mode: 2d
+skip_connections: False
+kernel_size: 3
+# final_non_linearity: TanH
