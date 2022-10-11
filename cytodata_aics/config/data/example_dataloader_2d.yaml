@@ -17,14 +17,9 @@ loaders:
     dtype: float32 # BCELoss takes probabilities
   image:
     _target_: serotiny.io.dataframe.loaders.LoadImage
-    column: max_projection_z
-    select_channels: ['dna']  
+    column: max_projection_y
+    select_channels: ['dna','membrane']  
     dtype: float32
-    unsqueeze_first_dim: true
-    transform:
-      _partial_: true
-      _target_: cytodata_aics.io_utils.rescale_image
-      channels: ['dna']
-    
+    unsqueeze_first_dim: false #set this to true when you have only one select_channel, and to false when you have multiple channels
     
 split_column: "split"
