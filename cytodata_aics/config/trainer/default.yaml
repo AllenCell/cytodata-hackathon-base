@@ -6,3 +6,4 @@ _target_: pytorch_lightning.Trainer
 max_epochs:
 gpus:
 enable_checkpointing: True
+default_root_dir: ${output_root}
