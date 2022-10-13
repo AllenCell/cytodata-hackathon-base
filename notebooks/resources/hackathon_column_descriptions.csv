@@ -18,7 +18,6 @@ center_slice,Path to the center slice of the Z-stack,cell images
 Description (from Uniprot),The description of protein function taken from the Uniprot database,cell metadata
 dna_clip_hi,DNA pixel intensity used for upper bound clipped values,cell metric
 dna_clip_lo,DNA pixel intensity used for lower bound clipped values,cell metric
-Draft mitotic state resolved,Mitotic state as validated by experts,cell metadata
 edge_flag,a boolean value indicating if this cell is on the edge of a colony,cell metadata
 fits_x,Boolean for if cell fits within bounding box for the X dimension,cell metric
 fits_y,Boolean for if cell fits within bounding box for the Y dimension,cell metric
@@ -77,4 +76,3 @@ this_cell_nbr_dist_2d,a dictionary of the distance (2D euclidean distance in XY 
 WellId,Well identifier,field-of-view metadata
 WorkflowId,Imaging workflow identifier (see Variance paper for details?),field-of-view metadata
 Protein,The protein name.,cell metadata
-Expert mitotic state resolved,Mitotic state as annotated by experts,cell metadata
