@@ -1,7 +1,7 @@
 defaults:
   - /defaults/mlflow/default@_here_
   
-tracking_uri: http://mlflow.cytodata.allencell.org
+tracking_uri: http://mlflow.mlflow.svc.cluster.local
 experiment_name: chapter_5_example
 run_name:
 #autolog:
