@@ -3,7 +3,7 @@ _target_: serotiny.datamodules.ManifestDatamodule
 path: /home/aicsuser/serotiny_data/cells_edgeVSnoedge.csv
 
 batch_size: 64
-num_workers: 10
+num_workers: 6
 shuffle: true
 
 loaders:
