@@ -25,7 +25,6 @@ network:
     - *conv_block
     - *conv_block
     - *conv_block
-    - *conv_block
     - _target_: serotiny.networks.layers.Flatten
     - _target_: torch.nn.LazyLinear
       out_features: 1

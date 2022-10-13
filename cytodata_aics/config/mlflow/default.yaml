@@ -1,9 +1,9 @@
 defaults:
-  - /defaults/mlflow/default@_here_ #inherit serotiny's mlflow config
-
-#tracking_uri: 
-#experiment_name:
-#run_name:
+  - /defaults/mlflow/default@_here_
+  
+tracking_uri: http://mlflow.mlflow.svc.cluster.local
+experiment_name: chapter_5_example
+run_name:
 #autolog:
   #log_every_n_epoch:
   #log_models:

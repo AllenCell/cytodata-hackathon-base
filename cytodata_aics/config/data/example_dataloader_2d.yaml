@@ -3,7 +3,7 @@ _target_: serotiny.datamodules.ManifestDatamodule
 path: /home/aicsuser/serotiny_data/cells_edgeVSnoedge.csv
 
 batch_size: 64
-num_workers: 10
+num_workers: 6
 shuffle: true
 
 loaders:
@@ -17,7 +17,9 @@ loaders:
     dtype: float32 # BCELoss takes probabilities
   image:
     _target_: serotiny.io.dataframe.loaders.LoadImage
-    column: max_projection_z
-    select_channels: ['membrane']  
+    column: max_projection_y
+    select_channels: ['dna','membrane']  
+    dtype: float32
+    unsqueeze_first_dim: false #set this to true when you have only one select_channel, and to false when you have multiple channels
     
 split_column: "split"

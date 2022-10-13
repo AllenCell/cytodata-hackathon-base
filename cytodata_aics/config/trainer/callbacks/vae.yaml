@@ -1,0 +1,9 @@
+- _target_: cytodata_aics.vae_utils.GetEmbeddings
+  x_label: image
+  id_label: id
+  
+- _target_: cytodata_aics.vae_utils.GetKLDRanks
+  test_all: False
+  on_train: False
+  on_val: False
+  on_test: True
