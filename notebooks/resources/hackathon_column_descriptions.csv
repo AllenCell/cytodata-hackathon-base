@@ -55,7 +55,7 @@ nuclear_volume,Nuclear volume computed from nuclear segmentation,cell metric
 PiezoId,Piezo configuration of the microscope,field-of-view metadata
 PlateId,Plate identifier,field-of-view metadata
 ProtocolId,Matrigel protocol identifier,field-of-view metadata
-registered_path,Path of the fully registered cell image,cell images
+3d_image,Path of the fully registered cell image,cell images
 scale_micron,the size (in micrometer) of a single voxel along each dimension,cell metric
 shape_mode_1_height,PC1 corresponding to a representation of cell height,cell metric
 shape_mode_2_volume,PC2 corresponding to a representation of cell volume,cell metric

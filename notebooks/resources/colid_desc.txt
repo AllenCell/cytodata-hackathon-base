@@ -59,7 +59,7 @@ membrane_clip_lo	Cell Membrane pixel intensity used for lower bound clipped valu
 membrane_clip_hi	Cell Membrane pixel intensity used for upper bound clipped values
 structure_clip_lo	Structure pixel intensity used for lower bound clipped values
 structure_clip_hi	Structure pixel intensity used for upper bound clipped values
-registered_path	Path of the fully registered cell image
+3d_image	Path of the fully registered cell image
 max_projection_z	Path to Max projection of Z dimension
 mean_projection_z	Path to Mean projection of Z dimension
 median_projection_z	Path to median projection of Z dimension

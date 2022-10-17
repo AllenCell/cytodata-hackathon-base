@@ -15,7 +15,7 @@ loaders:
     dtype: float32
   image:
     _target_: serotiny.io.dataframe.loaders.LoadImage
-    column: registered_path
+    column: 3d_image
     select_channels: ['dna']
     ome_zarr_level: 2
     unsqueeze_first_dim: true
