@@ -3,7 +3,7 @@ latent_dim: 512
 in_channels: 1
 hidden_channels: [2, 2, 2, 2]
 max_pool_layers: [2]
-input_dims: [238, 374]
+input_dims: [129, 374]
 x_label: image
 optimizer:
   _partial_: true
