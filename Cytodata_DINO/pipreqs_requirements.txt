@@ -1,0 +1,25 @@
+# install torch and torchvision using conda separately
+cellpose==2.1.0
+dask
+imageio
+kornia
+matplotlib
+numpy
+oyaml
+pandas
+pretrainedmodels
+pytorchcv
+PyYAML
+requests
+requests_ip_rotator
+scikit-image
+scikit-learn
+scipy
+seaborn
+submitit
+swifter
+timm
+tqdm
+umap-learn
+Pillow
+

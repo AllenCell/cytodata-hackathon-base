@@ -1,0 +1,284 @@
+---
+ model:
+   model_type: DINO
+   arch: vit_base
+   data_path: /dgx1nas1/storage/data/mdoron/human_protein_atlas/single_cell_metadata.csv
+   output_dir: /dgx1nas1/storage/data/mdoron/Dino4Cells/output/single_cell_test/
+   datatype: normalized_4_channels
+   saveckp_freq: 25
+   batch_size_per_gpu: 32
+   num_channels: 4
+   patch_size: 8
+   local_crops_scale: '0.05 0.4'
+   epochs: 300
+
+ embedding:
+   pretrained_weights: /dgx1nas1/storage/data/mdoron/Dino4Cells/output/single_cell_test/checkpoint.pth 
+   output_path: /dgx1nas1/storage/data/mdoron/Dino4Cells/results/single_cell_test/features.pth
+   df_path: /dgx1nas1/storage/data/mdoron/human_protein_atlas/single_cell_metadata.csv 
+   image_size: 224 
+   num_workers: 10 
+   embedding_has_labels: true
+ 
+ plot_embedding:
+   output_name: /dgx1nas1/storage/data/mdoron/Dino4Cells/results/single_cell_test/ 
+ 
+ classification:
+   train_inds: /dgx1nas1/storage/data/mdoron/human_protein_atlas/GCT_train_IDs.csv
+   test_inds: /dgx1nas1/storage/data/mdoron/human_protein_atlas/GCT_test_IDs.csv
+   protein_classifier: /dgx1nas1/storage/data/mdoron/Dino4Cells/results/single_cell_test/protein_classifier.pth 
+   cell_type_classifier: /dgx1nas1/storage/data/mdoron/Dino4Cells/results/single_cell_test/cell_type_classifier.pth
+   classifier_type: MLLR
+   loss: BCE
+   protein_task: full
+   use_pretrained_cell_type_classifier: false
+   use_pretrained_protein_classifier: false
+   features_paths_list:
+     - /dgx1nas1/storage/data/mdoron/Dino4Cells/results/single_cell_test/features.pth
+   train_protein: true
+   train_cell_type: true
+   verbose: true
+   full_image_train: true
+   aggregate_result_by_single_cell: true
+   output_file: /dgx1nas1/storage/data/mdoron/Dino4Cells/results/single_cell_test/results.txt
+
+ visualize:
+   image_path: '/dgx1nas1/storage/data/mdoron/Dino4Cells/datasets/HPA/data/75112_1646_F7_1_blue.jpg'
+
+ flip_and_color_jitter_transforms: 
+   RandomRotation: 
+    - False
+    - {degrees: 90, expand: False}
+   RandomHorizontalFlip: 
+    - False
+    - {p: 0.5}
+   Change_brightness: 
+    - True
+    - {p: 0.8}
+   Change_contrast:
+    - True
+    - {p: 0.8}
+   GaussianBlur: 
+    - False
+    - {p: 1.0}
+   ColorJitter:
+    - False
+    - {brightness: 0.4, contrast: 0.4, saturation: 0.2, hue: 0.1}
+   ColorJitter_for_RGBA:
+    - False
+    - {brightness: 0.4, contrast: 0.4, saturation: 0.2, hue: 0.1}
+    
+ normalization:
+   Get_specific_channel: # nucleus_only
+    - False
+    - {c: 0}
+   Get_specific_channel: # protein_only
+    - False
+    - {c: 1}
+   Get_specific_channel: # cyto_only
+    - False
+    - {c: 2}
+   Get_specific_channel: # ER_only
+    - False
+    - {c: 3}
+   ToTensor: 
+    - True
+    - # no params
+   Normalize: 
+    - True
+    - {mean: [0.1450534, 0.11360057, 0.1231717, 0.14919987], std: [0.18122554, 0.14004277, 0.18840286, 0.17790672]}
+   self_normalize: 
+    - False
+    - # no params
+
+
+ # --- Global crops 1 ---: 
+ global_transfo1:
+   Warp_cell:
+    - True
+    - # no params
+   Single_cell_centered:
+    - False
+    - # no params
+   Single_cell_random_resize:
+    - False
+    - # no params
+   FA_resize:
+    - False
+    - {size: 512}
+   Single_cell_Resize:
+    - True
+    - # no params
+   Single_cell_Mirror: 
+    - False
+    - # no params
+   remove_channel:
+    - True
+    - {p: 0.2}
+   rescale_protein:
+    - True
+    - {p: 0.2}
+   RandomResizedCrop:
+    - True
+    - {size: 224, scale: [0.4, 1]}
+   Threshold_protein: 
+    - False
+    - {p: 0.8, interpolation: Image.BICUBIC}
+   RandomResizedCenterCrop:
+    - False
+    - {size: 224, scale: [0.4, 1], depth: 1e6, s: 0.7}
+    
+ global_aug1:
+   GaussianBlur:
+    - False
+    - {p: 1.0}
+   Solarization:
+    - False
+    - {p: 0.2}
+   Solarization_for_RGBA:
+    - False
+    - {p: 0.2}
+   rnd_dihedral:
+    - False
+    - # no params
+
+ testing_transfo:
+   Single_cell_centered:
+    - True
+    - # no params
+   Single_cell_random_resize:
+    - False
+    - # no params
+   FA_resize:
+    - False
+    - {size: 512}
+   Single_cell_Resize:
+    - False
+    - # no params
+   Single_cell_Mirror: 
+    - False
+    - # no params
+   Get_specific_channel:
+    - False
+    - {c: 0}
+   Get_specific_channel:
+    - False
+    - {c: 1}
+   Get_specific_channel:
+    - False
+    - {c: 2}
+   Get_specific_channel:
+    - False
+    - {c: 3}
+   ToTensor: 
+    - True
+    - # no params
+   Normalize: 
+    - True
+    - {mean: [0.1450534, 0.11360057, 0.1231717, 0.14919987], std: [0.18122554, 0.14004277, 0.18840286, 0.17790672]}
+   self_normalize: 
+    - False
+    - # no params
+
+ #  --- Global crops 2 ---: 
+ global_transfo2:
+   Warp_cell:
+    - True
+    - # no params
+   Single_cell_centered:
+    - False
+    - # no params
+   Single_cell_random_resize:
+    - False
+    - # no params
+   FA_resize:
+    - False
+    - {size: 512}
+   Single_cell_Resize:
+    - True
+    - # no params
+   Single_cell_Mirror: 
+    - False
+    - # no params
+   remove_channel:
+    - True
+    - {p: 0.2}
+   rescale_protein:
+    - True
+    - {p: 0.2}
+   RandomResizedCrop:
+    - True
+    - {size: 224, scale: [0.4, 1]}
+   Threshold_protein: 
+    - False
+    - {p: 0.8, interpolation: Image.BICUBIC}
+   RandomResizedCenterCrop:
+    - False
+    - {size: 224, scale: [0.4, 1], depth: 1e6, s: 0.7}
+    
+ global_aug2:
+   GaussianBlur:
+    - False
+    - {p: 1.0}
+   Solarization:
+    - False
+    - {p: 0.2}
+   Solarization_for_RGBA:
+    - False
+    - {p: 0.2}
+   rnd_dihedral:
+    - False
+    - # no params
+  
+  
+ # --- Local crops ---: 
+ local_crops_number: 8 
+ local_transfo:
+   Warp_cell:
+    - True
+    - # no params
+   Single_cell_centered:
+    - False
+    - # no params
+   Single_cell_random_resize:
+    - False
+    - # no params
+   FA_resize:
+    - False
+    - {size: 512}
+   Single_cell_Resize:
+    - True
+    - # no params
+   Single_cell_Mirror: 
+    - False
+    - # no params
+   remove_channel:
+    - True
+    - {p: 0.2}
+   rescale_protein:
+    - True
+    - {p: 0.2}
+   RandomResizedCrop:
+    - True
+    - {size: 96, scale: [0.4, 1]}
+   Threshold_protein: 
+    - False
+    - {p: 0.8, interpolation: Image.BICUBIC}
+   RandomResizedCenterCrop:
+    - False
+    - {size: 96, scale: [0.4, 1], depth: 1e6, s: 0.7}
+    
+ local_aug:
+   GaussianBlur:
+    - False
+    - {p: 1.0}
+   rnd_dihedral:
+    - False
+    - # no params
+    
+ pipeline:
+   run_DINO: true
+   run_get_embeddings: true
+   run_plot_embeddings: true
+   run_classification: true
+   run_visualize: true
