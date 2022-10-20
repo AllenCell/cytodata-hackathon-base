@@ -178,7 +178,8 @@ if __name__ == "__main__":
             root=config["model"]["root"],
             # The target labels are the column names of the protein localizationsm
             # used to create the multilabel target matrix
-            target_labels=target_labels,
+            target_labels=None,
+            # target_labels=target_labels,
         )
 
     sampler = torch.utils.data.SequentialSampler(dataset)
@@ -203,7 +204,8 @@ if __name__ == "__main__":
         if config["embedding"]["embedding_has_labels"]:
             images, protein_location, cell_type, ID = record
         else:
-            images, ID, impath = record
+            images, ID = record
+            # images, ID, impath = record
 
         # TODO: move this logic to image_mode
         if config["model"]["model_type"] in wair_model_name_list:
@@ -233,12 +235,13 @@ if __name__ == "__main__":
             cell_types.extend(cell_type)
             protein_locations.extend(protein_location)
         else:
-            all_impaths.extend(impath)
+            all_impaths.extend([0])
 
         if config["embedding"]["embedding_has_labels"]:
             del images, protein_location, cell_type, ID
         else:
-            del images, ID, impath
+            del images, ID
+            # del images, ID, impath
 
     if args.output_prefix is None:
         output_path = f'{config["embedding"]["output_path"]}'

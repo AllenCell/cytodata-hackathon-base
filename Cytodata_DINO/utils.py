@@ -1911,7 +1911,8 @@ class residual_add_clf(nn.Module):
 
     def forward(self, x):
         x = x.reshape(x.shape[0], 1, x.shape[-1])
-        x = torch.nn.functional.relu(self.norm_layer(self.first_layer(x)))
+        f = self.norm_layer(self.first_layer(x))
+        x = torch.nn.functional.relu(f)
         if len(self.layers) > 0:
             x = self.layers(x)
         x = self.final_layer(x)

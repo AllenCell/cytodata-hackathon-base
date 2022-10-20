@@ -340,7 +340,8 @@ def train_dino(args, config):
         config["model"]["root"],
         transform=transform,
         loader=chosen_loader,
-        flist_reader=file_dataset.pandas_reader,
+        flist_reader=file_dataset.pandas_reader_only_file,
+        # flist_reader=file_dataset.pandas_reader,
         balance=False,
     )
     sampler = torch.utils.data.DistributedSampler(dataset, shuffle=True)
@@ -473,17 +474,12 @@ def train_dino(args, config):
     print("Loss, optimizer and schedulers ready.")
 
     # ============ optionally resume training ... ============
-    to_restore = {"epoch": 0}
-    utils.restart_from_checkpoint(
-        os.path.join(args.output_dir, "checkpoint.pth"),
-        run_variables=to_restore,
-        student=student,
-        teacher=teacher,
-        optimizer=optimizer,
-        fp16_scaler=fp16_scaler,
-        dino_loss=dino_loss,
+    checkpoint_model = torch.load(
+        "/scr/mdoron/allen/cytodata-hackathon-base/models/dino_deitsmall16_pretrain_full_checkpoint.pth"
     )
-    start_epoch = to_restore["epoch"]
+    student.load_state_dict(checkpoint_model["student"])
+    teacher.load_state_dict(checkpoint_model["teacher"])
+    start_epoch = 0
 
     start_time = time.time()
     print("Starting DINO training !")

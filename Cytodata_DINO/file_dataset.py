@@ -5,7 +5,6 @@ import os
 import numpy as np
 import os.path
 import pandas as pd
-import cellpainting_dataset
 from skimage import io
 from pathlib import Path
 from functools import partial
@@ -19,6 +18,11 @@ def tensor_loader(path, training=True):
 
 def default_loader(path, training=True):
     return t(io.imread(path))
+
+
+def cytodata_loader(path, training=True):
+    img = t(io.imread(path))[:, [0, 1, 3], :].permute(1, 2, 0)
+    return img
 
 
 def one_channel_loader(path, training=True):
@@ -82,6 +86,23 @@ def pandas_reader_binary_labels(flist, target_labels=None):
         file_names, IDs, cell_lines, target_matrix
     ):
         imlist.append((impath, target, cell_line, ID))
+    return imlist
+
+
+def pandas_reader_only_file(flist, ids=None):
+    """
+    flist format: impath label\nimpath label\n ...(same to caffe's filelist)
+    """
+    if isinstance(flist, pd.DataFrame):
+        files = flist
+    else:
+        files = pd.read_csv(flist)[["file", "ID"]]
+    if type(ids) is not type(None):
+        files = files[files.ID.isin(ids)]
+    files = np.array(files.to_records(index=False))
+    imlist = []
+    for impath, ID in files:
+        imlist.append((impath, ID))
     return imlist
 
 
@@ -209,7 +230,8 @@ class ImageFileList(data.Dataset):
 
         # Return the item
         if self.training:
-            return img, protein
+            return img, ID
+            # return img, protein
         elif type(self.target_labels) is not type(None):
             return img, protein.astype(int), cell, ID
         elif self.with_labels:
@@ -235,7 +257,8 @@ class AutoBalancedPrecomputedFeatures(data.Dataset):
         self.IDs = np.array(IDs)
         self.idx = []
         self.df = pd.DataFrame(range(len(features)), columns=["ind"])
-        self.parse_labels()
+        if balance:
+            self.parse_labels()
         self.balance = balance
 
     def parse_labels(self):
@@ -351,13 +374,14 @@ class AutoBalancedFileList(ImageFileList):
 
 data_loaders = {
     "HPA": ImageFileList,
+    "cytodata": partial(ImageFileList, with_labels=False),
     "HPABalanced": AutoBalancedFileList,
-    "CellPainting": cellpainting_dataset.SingleCellDataset,
 }
 
 image_modes = {
     "normalized_3_channels": default_loader,
     "normalized_4_channels": default_loader,
+    "cytodata": cytodata_loader,
     "unnormalized_4_channels": norm_loader,
     "single_channel_r": partial(single_channel_loader, channel=0),
     "single_channel_g": partial(single_channel_loader, channel=1),
